@@ -41,10 +41,9 @@ const App: React.FC = () => {
   const [observations, setObservations] = useState<Observation[]>([])
   const [rewardFormula, setRewardFormula] = useState(`function add(a, b) {\n  return a + b;\n}`)
 
-  const handleCheckboxChange = (position: number): void => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item,
-    )
+  const handleCheckboxChange = (position: number, state: boolean): void => {
+    const updatedCheckedState = [...checkedState]
+    updatedCheckedState[position] = state
     setCheckedState(updatedCheckedState)
 
     const checkedObservations: Observation[] = []
@@ -68,184 +67,182 @@ const App: React.FC = () => {
   }
 
   return (
-    <div style={{ margin: 10 }}>
-      <h1 style={{ fontFamily: 'Raleway', fontSize: '80px', color: '#ffffff' }}>
+    <div className='m-10'>
+      <h1 className='text-8xl font-["Raleway"] text-white'>
         &#47;&#47; ŠTART <br />
         SIMULÁCIE
       </h1>
-      <h2
-        style={{
-          fontFamily: 'Raleway',
-          fontSize: '32px',
-          color: '#ffffff',
-          marginTop: '40px',
-          marginBottom: '10px',
-        }}
-      >
-        VÝBER OVLÁDAČA
-      </h2>
-      <div className='flex gap-8'>
-        <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
+      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER OVLÁDAČA</h2>
+      <div className='flex flex-row gap-8'>
+        <div
+          className='h-full relative w-1/5 border rounded-xl border-white'
+          onClick={() => {
+            setControllerType('ppo-agent')
+          }}
+        >
           <img
             src={ppoAgent as string}
             alt='ppo-agent'
-            style={{ width: '300px', height: '400px' }}
+            draggable={false}
+            className={
+              'w-full h-full object-cover' +
+              (controllerType === 'ppo-agent' ? ' hue-rotate-60' : '')
+            }
           />
-          <p
-            style={{
-              fontSize: '18px',
-              color: 'white',
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 'fit-content',
-              margin: 'auto',
-            }}
-          >
-            <b>PPO Agent</b> <br />
+          {controllerType === 'ppo-agent' && (
+            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+              ✓
+            </span>
+          )}
+          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+            <span className='font-bold text-lg'>PPO Agent</span> <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
             ultricies lacinia, nisl nisl aliquet nunc, sit
           </p>
         </div>
-        <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
+
+        <div
+          className='h-full relative w-1/5 border rounded-xl border-white'
+          onClick={() => {
+            setControllerType('deepbots')
+          }}
+        >
           <img
             src={deepbots as string}
             alt='deepbots'
-            style={{ width: '300px', height: '400px' }}
+            draggable={false}
+            className={
+              'w-full h-full object-cover' + (controllerType === 'deepbots' ? ' hue-rotate-60' : '')
+            }
           />
-          <p
-            style={{
-              fontSize: '18px',
-              color: 'white',
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 'fit-content',
-              margin: 'auto',
-            }}
-          >
-            <b>Deepbots</b> <br />
+          {controllerType === 'deepbots' && (
+            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+              ✓
+            </span>
+          )}
+          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+            <span className='font-bold text-lg'>Deepbots</span> <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
             ultricies lacinia, nisl nisl aliquet nunc, sit
           </p>
         </div>
       </div>
-      <h2
-        style={{
-          fontFamily: 'Raleway',
-          fontSize: '32px',
-          color: '#ffffff',
-          marginTop: '40px',
-          marginBottom: '10px',
-        }}
-      >
-        VÝBER SVETA
-      </h2>
-      <div className='flex gap-8'>
-        <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
-          <img src={ppoAgent as string} alt='world 1' style={{ width: '300px', height: '400px' }} />
-          <p
-            style={{
-              fontSize: '18px',
-              color: 'white',
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 'fit-content',
-              margin: 'auto',
-            }}
-          >
-            {' '}
-            <b>World 1</b> <br />
+      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER SVETA</h2>
+      <div className='flex flex-row gap-8'>
+        <div
+          className='h-full relative w-1/5 border rounded-xl border-white'
+          onClick={() => {
+            setWorldType('world-n-1')
+          }}
+        >
+          <img
+            src={ppoAgent as string}
+            alt='world 1'
+            draggable={false}
+            className={
+              'w-full h-full object-cover' + (worldType === 'world-n-1' ? ' hue-rotate-60' : '')
+            }
+          />
+          {worldType === 'world-n-1' && (
+            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+              ✓
+            </span>
+          )}
+          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+            <span className='font-bold text-lg'>World 1</span> <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
             ultricies lacinia, nisl nisl aliquet nunc, sit
           </p>
         </div>
-        <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
-          <img src={deepbots as string} alt='world 2' style={{ width: '300px', height: '400px' }} />
-          <p
-            style={{
-              fontSize: '18px',
-              color: 'white',
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 'fit-content',
-              margin: 'auto',
-            }}
-          >
-            <b>World 2</b> <br />
+        <div
+          className='h-full relative w-1/5 border rounded-xl border-white'
+          onClick={() => {
+            setWorldType('world-n-2')
+          }}
+        >
+          <img
+            src={ppoAgent as string}
+            alt='world 2'
+            draggable={false}
+            className={
+              'w-full h-full object-cover' + (worldType === 'world-n-2' ? ' hue-rotate-60' : '')
+            }
+          />
+          {worldType === 'world-n-2' && (
+            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+              ✓
+            </span>
+          )}
+          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+            <span className='font-bold text-lg'>World 2</span> <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
             ultricies lacinia, nisl nisl aliquet nunc, sit
           </p>
         </div>
-        <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
-          <img src={deepbots as string} alt='world 3' style={{ width: '300px', height: '400px' }} />
-          <p
-            style={{
-              fontSize: '18px',
-              color: 'white',
-              alignSelf: 'flex-end',
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 'fit-content',
-              margin: 'auto',
-            }}
-          >
-            {' '}
-            <b>World 3</b> <br />
+        <div
+          className='h-full relative w-1/5 border rounded-xl border-white'
+          onClick={() => {
+            setWorldType('world-n-3')
+          }}
+        >
+          <img
+            src={ppoAgent as string}
+            alt='world 3'
+            draggable={false}
+            className={
+              'w-full h-full object-cover' + (worldType === 'world-n-3' ? ' hue-rotate-60' : '')
+            }
+          />
+          {worldType === 'world-n-3' && (
+            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-[#02FC74] z-20 text-white text-lg text-center'>
+              ✓
+            </span>
+          )}
+          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+            <span className='font-bold text-lg'>World 3</span> <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
             ultricies lacinia, nisl nisl aliquet nunc, sit
           </p>
         </div>
       </div>
-      <h2
-        style={{
-          fontFamily: 'Raleway',
-          fontSize: '32px',
-          color: '#ffffff',
-          marginTop: '40px',
-          marginBottom: '10px',
-        }}
-      >
-        VÝBER OBSERVÁCIÍ
-      </h2>
+      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER OBSERVÁCIÍ</h2>
       <div className='grid grid-cols-4 gap-8 content-center'>
         {observationTypes.map((i, index) => (
-          <div key={i} className='rounded-lg p-3 border border-solid bg-transparent'>
-            <span className='mr-3 text-lg font-medium text-white dark:text-white w-100'>{i}</span>
-            <label className='relative inline-flex items-center cursor-pointer'>
-              <input type='checkbox' value='' className='sr-only peer' />
+          <span
+            key={i}
+            className={
+              'rounded-lg p-3 border border-solid border-white flex justify-start items-center' +
+              (checkedState[index] ? ' bg-webotsGreen' : '')
+            }
+          >
+            <span
+              className={
+                'mr-3 text-lg font-medium  w-2/3 ' +
+                (checkedState[index] ? 'text-[#021727]' : 'text-white')
+              }
+            >
+              {i}
+            </span>
+            <label className='inline-flex items-center cursor-pointer w-1/3'>
+              <input
+                type='checkbox'
+                value=''
+                className='sr-only peer'
+                onChange={(e) => {
+                  handleCheckboxChange(index, (e.target as HTMLInputElement).checked)
+                }}
+              />
               <div
-                className="w-12 h-6 bg-transparent border border-solid rounded-full peer peer-focus:ring-4 peer-focus:ring-green-300 
-                  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute 
-                  after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full 
-                  after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                className="w-12 h-6 relative bg-[#021727] border border-solid border-white rounded-full peer 
+                  peer-checked:after:translate-x-[106%] peer-checked:after:border-white after:content-[''] after:absolute 
+                  after:top-[1px] after:left-[2px] after:bg-white after:border peer-checked:after:bg-webotsGreen  after:rounded-full 
+                  after:h-5 after:w-5 after:transition-all "
               ></div>
             </label>
-          </div>
+          </span>
         ))}
       </div>
-      <h2
-        style={{
-          fontFamily: 'Raleway',
-          fontSize: '32px',
-          color: '#ffffff',
-          marginTop: '40px',
-          marginBottom: '10px',
-        }}
-      >
+      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>
         EDITOVANIE ODMEŇOVACIEHO VZORCA
       </h2>
       <div className='border rounded-md border-white'>
@@ -257,32 +254,23 @@ const App: React.FC = () => {
             setRewardFormula(x.target.value)
           }}
           padding={15}
-          className='bg-dark-blue text-xl'
+          className='bg-transparent text-sm '
           style={{
-            fontSize: 12,
-            backgroundColor: 'transparent',
             fontFamily:
-              'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+              '"ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", "Menlo", "monospace"',
           }}
         />
       </div>
-      <div style={{ textAlign: 'center', marginTop: '40px' }}>
+      <div className='flex justify-center mt-10'>
         <button
-          style={{
-            backgroundColor: '#02FC74',
-            borderRadius: '100px',
-            width: '300px',
-            height: '50px',
-            fontFamily: 'Raleway',
-            fontSize: '20px',
-            color: '#ffffff',
-          }}
+          className='rounded-full border w-1/2 h-[50px] bg-webotsGreen text-white font-["Raleway"] text-2xl'
           onClick={handleSubmit}
         >
           ŠTART SIMULÁCIE
         </button>
       </div>
       <div
+        // className='-z-1 bg-blend-lighten fixed w-[40vw] h-[60vh] left-[-20vw] bottom-[-30vh] bg-gradient-to-tr from-[rgba(66,255,255,0.2)] from-30% via-[rgba(9,47,61,0.1)] via-60% to-transparent to-100%'
         style={{
           position: 'fixed',
           width: '40vw',

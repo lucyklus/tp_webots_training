@@ -1,18 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./node_modules/flowbite/**/*.js"
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     colors: {
-      'green': '#02FC74',
-      'blue': '#021727'
+      'webotsGreen': '#02FC74',
     },
-    extend: {
-    },
+    extend: {},
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
+  plugins: [],
 }
-
