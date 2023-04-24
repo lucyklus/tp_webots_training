@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     colors: {
       'webotsGreen': '#02FC74',
+      'webotsBlue': '#021727',
     },
     extend: {},
   },

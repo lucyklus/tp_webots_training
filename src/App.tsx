@@ -3,63 +3,161 @@ import CodeEditor from '@uiw/react-textarea-code-editor'
 
 import deepbots from './images/ppoagent.png'
 import ppoAgent from './images/deepbots.png'
+import obstacles from './images/worlds/obstacles.jpg'
+import randomBall from './images/worlds/random_ball.png'
+import twoRobotsBarrier from './images/worlds/2_robots_barrier.jpg'
+import twoRobotsWithoutBarrier from './images/worlds/2_robots_without_barrier.jpg'
+
+import {
+  type IControllerGeneratorConfig,
+  type Controller,
+  type Observation,
+  type World,
+} from './types'
 
 const App: React.FC = () => {
-  const controllerTypes = ['ppo-agent', 'deepbots'] as const
-  type Controller = (typeof controllerTypes)[number]
+  const [controllers] = useState<Controller[]>([
+    {
+      type: 'deepbots',
+      title: 'Deepbots',
+      description: 'Deepbots is blah blah',
+      image: deepbots as string,
+    },
+    {
+      type: 'ppo-agent',
+      title: 'PPO agent',
+      description: 'PPO agent is bla asfd aasf',
+      image: ppoAgent as string,
+    },
+  ])
 
-  const worldTypes = ['world-n-1', 'world-n-2', 'world-n-3'] as const
-  type World = (typeof worldTypes)[number]
+  const [worlds] = useState<World[]>([
+    {
+      type: 'obstacles',
+      title: 'Multiple obstacles',
+      description: 'Lorem ipsum',
+      image: obstacles as string,
+    },
+    {
+      type: 'random-ball',
+      title: 'Random ball position',
+      description: 'Lorem ipsum',
+      image: randomBall as string,
+    },
+    {
+      type: '2-robots-barrier',
+      title: 'Two robots with barrier',
+      description: 'Lorem ipsum',
+      image: twoRobotsBarrier as string,
+    },
+    {
+      type: '2-robots-without-barrier',
+      title: 'Two robots without barrier',
+      description: 'Lorem ipsum',
+      image: twoRobotsWithoutBarrier as string,
+    },
+  ])
 
-  const observationTypes = [
-    'camera-ball-distance',
-    'camera-ball-orientation',
-    'camera-op-goal-distance',
-    'supervisor-op-player-distance',
-    'input-data-5',
-    'input-data-6',
-    'input-data-7',
-    'input-data-8',
-    'input-data-9',
-    'input-data-10',
-    'input-data-11',
-    'input-data-12',
-  ] as const
-  type Observation = (typeof observationTypes)[number]
-  interface IControllerGeneratorConfig {
-    controller: Controller
-    world: World
-    observations: Observation[]
-    reward: string
-  }
+  const [observations, setObservations] = useState<Observation[]>([
+    {
+      type: 'camera-ball-distance',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'camera-ball-orientation',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'camera-op-goal-distance',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'supervisor-op-player-distance',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-5',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-6',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-7',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-8',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-9',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-10',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-11',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+    {
+      type: 'input-data-12',
+      description: 'Camera ball distance',
+      selected: false,
+      image: ppoAgent as string,
+    },
+  ])
 
-  const [checkedState, setCheckedState] = useState(
-    new Array<boolean>(observationTypes.length).fill(false),
-  )
-  const [controllerType, setControllerType] = useState<Controller>('ppo-agent')
-  const [worldType, setWorldType] = useState<World>('world-n-1')
-  const [observations, setObservations] = useState<Observation[]>([])
+  const [controller, setController] = useState<Controller>(controllers[0])
+  const [world, setWorld] = useState<World>(worlds[0])
   const [rewardFormula, setRewardFormula] = useState(`function add(a, b) {\n  return a + b;\n}`)
 
   const handleCheckboxChange = (position: number, state: boolean): void => {
-    const updatedCheckedState = [...checkedState]
-    updatedCheckedState[position] = state
-    setCheckedState(updatedCheckedState)
+    const newObservations = [...observations]
+    newObservations[position].selected = state
+    setObservations(newObservations)
+  }
 
-    const checkedObservations: Observation[] = []
-    updatedCheckedState.forEach((item, index) => {
-      if (item) {
-        checkedObservations.push(observationTypes[index])
-      }
-    })
-    setObservations(checkedObservations)
+  const [currentObservation, setCurrentObservation] = useState<Observation | null>(null)
+
+  const display = (observation: Observation): void => {
+    setCurrentObservation(observation)
+  }
+
+  const hide = (): void => {
+    setCurrentObservation(null)
   }
 
   const handleSubmit = (): void => {
     const config: IControllerGeneratorConfig = {
-      controller: controllerType,
-      world: worldType,
-      observations,
+      controller: controller.type,
+      world: world.type,
+      observations: observations.filter((ob) => ob.selected).map((ob) => ob.type),
       reward: rewardFormula,
     }
     console.log(config)
@@ -73,155 +171,109 @@ const App: React.FC = () => {
         SIMULÁCIE
       </h1>
       <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER OVLÁDAČA</h2>
-      <div className='flex flex-row gap-8'>
-        <div
-          className='h-full relative w-1/5 border rounded-xl border-white'
-          onClick={() => {
-            setControllerType('ppo-agent')
-          }}
-        >
-          <img
-            src={ppoAgent as string}
-            alt='ppo-agent'
-            draggable={false}
-            className={
-              'w-full h-full object-cover' +
-              (controllerType === 'ppo-agent' ? ' hue-rotate-60' : '')
-            }
-          />
-          {controllerType === 'ppo-agent' && (
-            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
-              ✓
-            </span>
-          )}
-          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
-            <span className='font-bold text-lg'>PPO Agent</span> <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
-            ultricies lacinia, nisl nisl aliquet nunc, sit
-          </p>
-        </div>
 
-        <div
-          className='h-full relative w-1/5 border rounded-xl border-white'
-          onClick={() => {
-            setControllerType('deepbots')
-          }}
-        >
-          <img
-            src={deepbots as string}
-            alt='deepbots'
-            draggable={false}
-            className={
-              'w-full h-full object-cover' + (controllerType === 'deepbots' ? ' hue-rotate-60' : '')
-            }
-          />
-          {controllerType === 'deepbots' && (
-            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
-              ✓
-            </span>
-          )}
-          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
-            <span className='font-bold text-lg'>Deepbots</span> <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
-            ultricies lacinia, nisl nisl aliquet nunc, sit
-          </p>
-        </div>
+      <div className='flex flex-row gap-8'>
+        {controllers.map((_controller) => (
+          <div
+            key={_controller.type}
+            className='h-full relative w-1/5 border rounded-xl border-white'
+            onClick={() => {
+              setController(_controller)
+            }}
+          >
+            <img
+              src={_controller.image as unknown as string}
+              alt={_controller.type}
+              draggable={false}
+              className={
+                'w-full h-full object-cover' +
+                (_controller.type === controller.type ? ' hue-rotate-60' : '')
+              }
+            />
+            {controller.type === _controller.type && (
+              <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+                ✓
+              </span>
+            )}
+            <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+              <span className='font-bold text-lg'>{_controller.title}</span> <br />
+              {_controller.description}
+            </p>
+          </div>
+        ))}
       </div>
       <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER SVETA</h2>
       <div className='flex flex-row gap-8'>
-        <div
-          className='h-full relative w-1/5 border rounded-xl border-white'
-          onClick={() => {
-            setWorldType('world-n-1')
-          }}
-        >
-          <img
-            src={ppoAgent as string}
-            alt='world 1'
-            draggable={false}
-            className={
-              'w-full h-full object-cover' + (worldType === 'world-n-1' ? ' hue-rotate-60' : '')
-            }
-          />
-          {worldType === 'world-n-1' && (
-            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
-              ✓
-            </span>
-          )}
-          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
-            <span className='font-bold text-lg'>World 1</span> <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
-            ultricies lacinia, nisl nisl aliquet nunc, sit
-          </p>
-        </div>
-        <div
-          className='h-full relative w-1/5 border rounded-xl border-white'
-          onClick={() => {
-            setWorldType('world-n-2')
-          }}
-        >
-          <img
-            src={ppoAgent as string}
-            alt='world 2'
-            draggable={false}
-            className={
-              'w-full h-full object-cover' + (worldType === 'world-n-2' ? ' hue-rotate-60' : '')
-            }
-          />
-          {worldType === 'world-n-2' && (
-            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
-              ✓
-            </span>
-          )}
-          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
-            <span className='font-bold text-lg'>World 2</span> <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
-            ultricies lacinia, nisl nisl aliquet nunc, sit
-          </p>
-        </div>
-        <div
-          className='h-full relative w-1/5 border rounded-xl border-white'
-          onClick={() => {
-            setWorldType('world-n-3')
-          }}
-        >
-          <img
-            src={ppoAgent as string}
-            alt='world 3'
-            draggable={false}
-            className={
-              'w-full h-full object-cover' + (worldType === 'world-n-3' ? ' hue-rotate-60' : '')
-            }
-          />
-          {worldType === 'world-n-3' && (
-            <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-[#02FC74] z-20 text-white text-lg text-center'>
-              ✓
-            </span>
-          )}
-          <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
-            <span className='font-bold text-lg'>World 3</span> <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, nisl ut
-            ultricies lacinia, nisl nisl aliquet nunc, sit
-          </p>
-        </div>
+        {worlds.map((_world) => (
+          <div
+            key={_world.type}
+            className='h-full relative border rounded-xl border-white'
+            onClick={() => {
+              setWorld(_world)
+            }}
+          >
+            <img
+              src={_world.image}
+              alt='world 1'
+              draggable={false}
+              className={
+                'w-[400px] h-[300px] object-fit' +
+                (world.type === _world.type ? ' hue-rotate-60' : '')
+              }
+            />
+            {world.type === _world.type && (
+              <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+                ✓
+              </span>
+            )}
+            <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+              <span className='font-bold text-lg'>{_world.title}</span> <br />
+              {_world.description}
+            </p>
+          </div>
+        ))}
       </div>
+      {currentObservation !== null && (
+        <span
+          className='absolute left-0 right-0 top-[100%] h-56 p-2 w-full text-white bg-[#021727] 
+          bg-opacity-90 flex justify-center items-center z-10'
+        >
+          <div className='flex justify-start gap-4'>
+            <img
+              alt={currentObservation.type}
+              src={currentObservation.image as unknown as string}
+              className='h-48 w-48'
+            />
+            <div className='flex flex-col justify-center'>
+              <b className='font-bold font-xl text-white'>{currentObservation.type}</b>
+              <span className='text-white'>{currentObservation.description}</span>
+            </div>
+          </div>
+        </span>
+      )}
       <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER OBSERVÁCIÍ</h2>
       <div className='grid grid-cols-4 gap-8 content-center'>
-        {observationTypes.map((i, index) => (
+        {observations.map((_observation, index) => (
           <span
-            key={i}
+            key={_observation.type}
+            onMouseEnter={() => {
+              display(_observation)
+            }}
+            onMouseLeave={() => {
+              hide()
+            }}
             className={
               'rounded-lg p-3 border border-solid border-white flex justify-start items-center' +
-              (checkedState[index] ? ' bg-webotsGreen' : '')
+              (_observation.selected ? ' bg-webotsGreen' : '')
             }
           >
             <span
               className={
                 'mr-3 text-lg font-medium  w-2/3 ' +
-                (checkedState[index] ? 'text-[#021727]' : 'text-white')
+                (_observation.selected ? 'text-[#021727]' : 'text-white')
               }
             >
-              {i}
+              {_observation.type}
             </span>
             <label className='inline-flex items-center cursor-pointer w-1/3'>
               <input
@@ -263,7 +315,7 @@ const App: React.FC = () => {
       </div>
       <div className='flex justify-center mt-10'>
         <button
-          className='rounded-full border w-1/2 h-[50px] bg-webotsGreen text-white font-["Raleway"] text-2xl'
+          className='rounded-full border w-1/4 h-[50px] bg-webotsGreen text-white font-["Raleway"] text-2xl'
           onClick={handleSubmit}
         >
           ŠTART SIMULÁCIE
