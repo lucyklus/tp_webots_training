@@ -1,74 +1,194 @@
 [
   {
-    "type": "camera-ball-distance",
-    "description": "Camera ball distance",
+    "type": "current_lm",
+    "description": "Rýchlosť ľavého motora v radiánoch <-10, 10>",
     "selected": false,
-    "image": "ppoagent"
+    "image": "current_lm"
   },
   {
-    "type": "camera-ball-orientation",
-    "description": "Camera ball distance",
+    "type": "current_rm",
+    "description": "Rýchlosť pravého motora v radiánoch <-10, 10>",
     "selected": false,
-    "image": "ppoagent"
+    "image": "current_rm"
   },
   {
-    "type": "camera-op-goal-distance",
-    "description": "Camera ball distance",
+    "type": "ball_in_sight",
+    "description": "Boolean hodnota či robot vidí loptu na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "ball_dist"
   },
   {
-    "type": "supervisor-op-player-distance",
-    "description": "Camera ball distance",
+    "type": "ball_distance",
+    "description": "Relatívna vzdialenosť medzi robotom a loptou",
     "selected": false,
-    "image": "ppoagent"
+    "image": "ball_dist"
   },
   {
-    "type": "input-data-5",
-    "description": "Camera ball distance",
+    "type": "ball_x",
+    "description": "X-ová hodnota ľavého horného rohu bounding boxu lopty na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "ball_obs_sq"
   },
   {
-    "type": "input-data-6",
-    "description": "Camera ball distance",
+    "type": "ball_size_x",
+    "description": "X-ová šírka bounding boxu lopty na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "ball_obs_sq"
   },
   {
-    "type": "input-data-7",
-    "description": "Camera ball distance",
+    "type": "ball_y",
+    "description": "Y-ová hodnota ľavého horného rohu bounding boxu lopty na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "ball_obs_sq"
   },
   {
-    "type": "input-data-8",
-    "description": "Camera ball distance",
+    "type": "ball_size_y",
+    "description": "Y-ová šírka bounding boxu lopty na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "ball_obs_sq"
   },
   {
-    "type": "input-data-9",
-    "description": "Camera ball distance",
+    "type": "my_goal_in_sight",
+    "description": "Boolean hodnota či robot vidí vlastnú bránku na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "my_goal_dist"
   },
   {
-    "type": "input-data-10",
-    "description": "Camera ball distance",
+    "type": "my_goal_distance",
+    "description": "Relatívna vzdialenosť medzi robotom a vlastnou bránkou",
     "selected": false,
-    "image": "ppoagent"
+    "image": "my_goal_dist"
   },
   {
-    "type": "input-data-11",
-    "description": "Camera ball distance",
+    "type": "my_goal_x",
+    "description": "X-ová hodnota ľavého horného rohu bounding boxu vlastnej bránky na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "goal_my_obs_sq"
   },
   {
-    "type": "input-data-12",
-    "description": "Camera ball distance",
+    "type": "my_goal_size_x",
+    "description": "X-ová šírka bounding boxu vlastnej bránky na kamere",
     "selected": false,
-    "image": "ppoagent"
+    "image": "goal_my_obs_sq"
+  },
+  {
+    "type": "my_goal_y",
+    "description": "Y-ová hodnota ľavého horného rohu bounding boxu vlastnej bránky na kamere",
+    "selected": false,
+    "image": "goal_my_obs_sq"
+  },
+  {
+    "type": "my_goal_size_y",
+    "description": "Y-ová šírka bounding boxu vlastnej bránky na kamere",
+    "selected": false,
+    "image": "goal_my_obs_sq"
+  },
+  {
+    "type": "opp_goal_in_sight",
+    "description": "Boolean hodnota či robot vidí oponentovu bránku na kamere",
+    "selected": false,
+    "image": "opp_goal_dist"
+  },
+  {
+    "type": "opp_goal_distance",
+    "description": "Relatívna vzdialenosť medzi robotom a súperovou bránkou",
+    "selected": false,
+    "image": "opp_goal_dist"
+  },
+  {
+    "type": "opp_goal_x",
+    "description": "X-ová hodnota ľavého horného rohu bounding boxu oponentovej bránky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
+  },
+  {
+    "type": "opp_goal_size_x",
+    "description": "X-ová šírka bounding boxu oponentovej bránky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
+  },
+  {
+    "type": "opp_goal_y",
+    "description": "Y-ová šírka bounding boxu oponentovej bránky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
+  },
+  {
+    "type": "opp_goal_size_y",
+    "description": "Y-ová šírka bounding boxu oponentovej bránky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
+  },
+  {
+    "type": "opp_in_sight",
+    "description": "Boolean hodnota či robot vidí oponenta na kamere",
+    "selected": false,
+    "image": "opp_dist"
+  },
+  {
+    "type": "opp_distance",
+    "description": "Relatívna vzdialenosť medzi robotom a oponentom",
+    "selected": false,
+    "image": "opp_dist"
+  },
+  {
+    "type": "opp_x",
+    "description": "X-ová hodnota ľavého horného rohu bounding boxu opponenta na kamere",
+    "selected": false,
+    "image": "opp_obs_sq"
+  },
+  {
+    "type": "opp_size_x",
+    "description": "X-ová šírka bounding boxu oponenta na kamere",
+    "selected": false,
+    "image": "opp_obs_sq"
+  },
+  {
+    "type": "opp_y",
+    "description": "Y-ová hodnota ľavého horného rohu bounding boxu opponenta na kamere",
+    "selected": false,
+    "image": "opp_obs_sq"
+  },
+  {
+    "type": "opp_size_y",
+    "description": "Y-ová šírka bounding boxu oponenta na kamere",
+    "selected": false,
+    "image": "opp_obs_sq"
+  },
+  {
+    "type": "obst_in_sight",
+    "description": "Boolean hodnota či robot vidí prekážku na kamere",
+    "selected": false,
+    "image": "obst_distance"
+  },
+  {
+    "type": "obst_distance",
+    "description": "Relatívna vzdialenosť medzi robotom a prekážkou",
+    "selected": false,
+    "image": "obst_distance"
+  },
+  {
+    "type": "obst_x",
+    "description": "X-ová hodnota ľavého horného rohu bounding boxu prekážky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
+  },
+  {
+    "type": "obst_size_x",
+    "description": "X-ová šírka bounding boxu prekážky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
+  },
+  {
+    "type": "obst_y",
+    "description": "Y-ová hodnota ľavého horného rohu bounding boxu prekážky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
+  },
+  {
+    "type": "obst_size_y",
+    "description": "Y-ová šírka bounding boxu prekážky na kamere",
+    "selected": false,
+    "image": "obstacle_obs_sq"
   }
 ]

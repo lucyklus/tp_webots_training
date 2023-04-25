@@ -1,26 +1,26 @@
 [
   {
-  "type": "goal-only",
-  "title": "Goal only",
-  "description": "Lorem ipsum",
-  "image": "obstacles"
-},
-{
-  "type": "goal-random-ball",
-  "title": "Random ball position",
-  "description": "Lorem ipsum",
-  "image": "randomBall"
-},
-{
-  "type": "goal-and-obstacles",
-  "title": "Goal and obstacles",
-  "description": "Lorem ipsum",
-  "image": "twoRobotsBarrier"
-},
-{
-  "type": "soccer",
-  "title": "Soccer",
-  "description": "Lorem ipsum",
-  "image": "twoRobotsWithoutBarrier"
-}
+    "type": "goal-and-obstacles", 
+    "title": "Prekážky",
+    "description": "Svet s prekážkami rozpoznateľnými na snímke z kamery",
+    "image": "obstacles"
+  },
+  {
+    "type": "goal-random-ball",
+    "title": "Náhodná lopta",
+    "description": "Lopta sa objaví na náhodnom mieste na ihrisku",
+    "image": "randomBall"
+  },
+  {
+    "type": "goal-only",
+    "title": "Neaktívny oponent",
+    "description": "Súper pôsobí ako pohybujúca sa prekážka",
+    "image": "twoRobotsWithBarrier"
+  },
+  {
+    "type": "soccer",
+    "title": "Tím vs. tím",
+    "description": "Každý robot hrá sám za seba, s vlastným trénovacím modelom",
+    "image": "twoRobotsWithoutBarrier"
+  }
 ]

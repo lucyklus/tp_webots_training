@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import CodeEditor from '@uiw/react-textarea-code-editor'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
 
 import { ControllerSelect } from './components/Controller/'
 import { WorldSelect } from './components/World/'
@@ -23,12 +25,12 @@ const App: React.FC = () => {
   const [world, setWorld] = useState<World>(worlds[0])
   const [observations, setObservations] = useState<Observation[]>(observationsJson as Observation[])
   const [currentObservation, setCurrentObservation] = useState<Observation | null>(null)
-  const [rewardFormula, setRewardFormula] = useState(`function add(a, b) {\n  return a + b;\n}`)
+  const [rewardFormula, setRewardFormula] = useState(`print('Coming soon')`)
+  const [showError, setShowError] = useState(false)
 
   const handleCheckboxChange = (position: number, state: boolean): void => {
     const newObservations = [...observations]
     newObservations[position].selected = state
-    console.log(newObservations)
     setObservations(newObservations)
   }
 
@@ -41,6 +43,10 @@ const App: React.FC = () => {
   }
 
   const handleSubmit = (): void => {
+    if (observations.filter((ob) => ob.selected).length === 0) {
+      setShowError(true)
+      return
+    }
     const config: IControllerGeneratorConfig = {
       controller: controller.type,
       world: world.type,
@@ -51,15 +57,46 @@ const App: React.FC = () => {
     // TODO: fetch post to BE
   }
 
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string): void => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setShowError(false)
+  }
+
   return (
     <div className='m-10'>
-      <h1 className='text-8xl font-["Raleway"] text-white'>
+      <Snackbar
+        open={showError}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <Alert onClose={handleClose} severity='error'>
+          Je potrebné vybrať aspoň jedno pozorovanie!
+        </Alert>
+      </Snackbar>
+      <h1 className='text-8xl font-["Raleway"] text-white mb-10'>
         &#47;&#47; ŠTART <br />
         SIMULÁCIE
       </h1>
+      <p className='text-2xl text-white text-justify'>
+        Vitaj v našom futbalovom neurónovom zážitku! Tu si môžeš odskúšať aký je to pocit trénovať
+        neurónky na futbalovom ihrisku v jednoduchom a zábavno-prehľadnom prostredí. Len si vyber
+        typ ovládača, jeden z našich pripravených futbalových svetov, pozorovania a metriky. Ak by
+        ti nejaký pojem ušiel, ako lopta pri zlej prihrávke, stačí prejsť myšou nad daný element a
+        nápoveda ti ho vysvetlí ako dobrý tréner.
+      </p>
 
-      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER OVLÁDAČA</h2>
-      <div className='flex flex-row gap-8'>
+      <h2 className='text-3xl text-white my-10 font-["Raleway"]'>VÝBER OVLÁDAČA</h2>
+      <p className='text-2xl text-white text-justify my-5'>
+        Tvoj vytvorený ovládač bude odoslaný na naše servery, kde sa začne trénovať, ako by mal hrať
+        priamo na Camp Nou. Po natrénovaní budeš ohodnotený a zobrazíš sa v rebríčku, kde môžeš
+        porovnať svoje taktické schopnosti s inými virtuálnymi trénermi futbalových géniov. Týmto
+        spôsobom môžeš otestovať, či si tvoj ovládač zaslúžil zlatú loptu, alebo skôr výprask od
+        kapitána.
+      </p>
+      <div className='flex flex-row gap-8 my-5'>
         {controllers.map((_controller) => (
           <ControllerSelect
             key={_controller.type}
@@ -72,7 +109,13 @@ const App: React.FC = () => {
         ))}
       </div>
 
-      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER SVETA</h2>
+      <h2 className='text-3xl text-white my-10 font-["Raleway"]'>VÝBER SVETA</h2>
+      <p className='text-2xl text-white text-justify my-5'>
+        Teraz prichádza zábavná časť - vyber si svet, v ktorom sa tvoji roboti pustia do divokého
+        futbalového turnaja. Každý svet má svoj vlastný rebríček, takže sa môžeš pokúsiť o
+        nastavenie simulácie viackrát a získať titul najväčšieho robotického futbalového majstra vo
+        viacerých svetoch!
+      </p>
       <div className='flex flex-row gap-8'>
         {worlds.map((_world) => (
           <WorldSelect
@@ -88,7 +131,7 @@ const App: React.FC = () => {
 
       {currentObservation !== null && (
         <span
-          className='absolute left-0 right-0 top-[100%] h-56 p-2 w-full text-white bg-[#021727] 
+          className='absolute left-0 right-0 h-56 p-2 w-full text-white bg-[#021727] 
           bg-opacity-90 flex justify-center items-center z-10'
         >
           <div className='flex justify-start gap-4'>
@@ -105,7 +148,13 @@ const App: React.FC = () => {
         </span>
       )}
 
-      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER OBSERVÁCIÍ</h2>
+      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>VÝBER POZOROVANÍ</h2>
+      <p className='text-2xl text-white text-justify my-5'>
+        Pozorovania sú ako robotov denník plný dobrodružstiev na ihrisku. Predstavte si, že váš
+        robot vraví: &quot;Dnes som videl takú loptu! A ešte väčšiu bránku!&quot; Na základe týchto
+        zážitkov sa PPO agent bude učiť ako školák a s nadšením vyberať svoje ďalšie kroky, takže si
+        vyberajte múdro - predsa len, kto by nechcel mať robota s pútavým denníkom?
+      </p>
       <div className='grid grid-cols-4 gap-8 content-center'>
         {observations.map((_observation, index) => (
           <ObservationToggle

@@ -35,7 +35,7 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
       )}
       <p
         className={
-          'absolute bottom-10 left-5 right-5 m-auto  h-fit z-10 font text-sm ' +
+          'absolute top-2/3 left-5 right-5 m-auto  h-fit z-10 font text-sm ' +
           (selected ? 'text-[#021727]' : 'text-white')
         }
       >
