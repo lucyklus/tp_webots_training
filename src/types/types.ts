@@ -1,4 +1,4 @@
-export type WorldType = 'obstacles' | 'random-ball' | '2-robots-barrier' | '2-robots-without-barrier'
+export type WorldType = 'goal-only' | 'goal-random-ball' | 'goal-and-obstacles' | 'soccer'
 
 export interface World {
   type: WorldType
@@ -7,7 +7,7 @@ export interface World {
   image: string
 }
 
-export type ControllerType = 'ppo-agent' | 'deepbots'
+export type ControllerType = 'pure' | 'deepbots'
 
 export interface Controller {
   type: ControllerType
@@ -41,5 +41,5 @@ export interface IControllerGeneratorConfig {
   controller: ControllerType
   world: WorldType
   observations: ObservationType[]
-  reward: string
+  rewardFn: string
 }
