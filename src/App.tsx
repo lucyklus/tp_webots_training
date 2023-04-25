@@ -176,7 +176,12 @@ const App: React.FC = () => {
         {controllers.map((_controller) => (
           <div
             key={_controller.type}
-            className='h-full relative w-1/5 border rounded-xl border-white'
+            className={
+              'relative w-1/5 border rounded-xl ' +
+              (_controller.type === controller.type
+                ? " border-webotsGreen after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:from-webotsGreen after:to-transparent"
+                : ' border-white')
+            }
             onClick={() => {
               setController(_controller)
             }}
@@ -185,17 +190,19 @@ const App: React.FC = () => {
               src={_controller.image as unknown as string}
               alt={_controller.type}
               draggable={false}
-              className={
-                'w-full h-full object-cover' +
-                (_controller.type === controller.type ? ' hue-rotate-60' : '')
-              }
+              className={'w-full h-full object-cover rounded-xl'}
             />
             {controller.type === _controller.type && (
-              <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+              <span className='absolute flex items-center justify-center rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 font-bold text-[#021727] text-lg'>
                 ✓
               </span>
             )}
-            <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+            <p
+              className={
+                'absolute bottom-10 left-5 right-5 m-auto  h-fit z-10 font text-sm ' +
+                (_controller.type === controller.type ? 'text-[#021727]' : 'text-white')
+              }
+            >
               <span className='font-bold text-lg'>{_controller.title}</span> <br />
               {_controller.description}
             </p>
@@ -207,7 +214,12 @@ const App: React.FC = () => {
         {worlds.map((_world) => (
           <div
             key={_world.type}
-            className='h-full relative border rounded-xl border-white'
+            className={
+              'relative border rounded-xl ' +
+              (world.type === _world.type
+                ? " border-webotsGreen after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:from-webotsGreen after:to-transparent"
+                : ' border-white')
+            }
             onClick={() => {
               setWorld(_world)
             }}
@@ -216,17 +228,19 @@ const App: React.FC = () => {
               src={_world.image}
               alt='world 1'
               draggable={false}
-              className={
-                'w-[400px] h-[300px] object-fit' +
-                (world.type === _world.type ? ' hue-rotate-60' : '')
-              }
+              className={'w-[400px] h-[300px] object-fit rounded-xl'}
             />
             {world.type === _world.type && (
-              <span className='absolute rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 text-white text-lg text-center'>
+              <span className='absolute flex items-center justify-center rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 font-bold text-[#021727] text-lg'>
                 ✓
               </span>
             )}
-            <p className='absolute bottom-10 left-5 right-5 m-auto text-white h-fit font text-sm'>
+            <p
+              className={
+                'absolute bottom-10 left-5 right-5 m-auto  h-fit z-10 font text-sm ' +
+                (world.type === _world.type ? 'text-[#021727]' : 'text-white')
+              }
+            >
               <span className='font-bold text-lg'>{_world.title}</span> <br />
               {_world.description}
             </p>
