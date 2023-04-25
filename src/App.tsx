@@ -126,24 +126,28 @@ const App: React.FC = () => {
         ))}
       </div>
 
-      <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"]'>
-        EDITOVANIE ODMEŇOVACIEHO VZORCA
-      </h2>
-      <div className='border rounded-md border-white'>
-        <CodeEditor
-          value={rewardFormula}
-          language='js'
-          placeholder='Please enter JS code.'
-          onChange={(x) => {
-            setRewardFormula(x.target.value)
-          }}
-          padding={15}
-          className='bg-transparent text-sm '
-          style={{
-            fontFamily:
-              '"ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", "Menlo", "monospace"',
-          }}
-        />
+      <div className='opacity-50'>
+        <h2 className='text-3xl text-white mt-10 mb-4 font-["Raleway"] opacity-50'>
+          UŽ ČOSKORO ... <br />
+          EDITOVANIE ODMEŇOVACIEHO VZORCA
+        </h2>
+        <div className='border rounded-md border-white'>
+          <CodeEditor
+            value={rewardFormula}
+            language='js'
+            placeholder='Please enter JS code.'
+            onChange={(x) => {
+              setRewardFormula(x.target.value)
+            }}
+            disabled
+            padding={15}
+            className='bg-transparent text-sm '
+            style={{
+              fontFamily:
+                '"ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", "Menlo", "monospace"',
+            }}
+          />
+        </div>
       </div>
 
       <div className='flex justify-center mt-10'>
