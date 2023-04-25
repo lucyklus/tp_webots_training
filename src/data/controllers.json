@@ -1,0 +1,14 @@
+[
+    {
+      "type": "pure",
+      "title": "Pure",
+      "description": "Pure is bla bala",
+      "image": "ppoagent"
+    },
+    {
+      "type": "deepbots",
+      "title": "Deepbots",
+      "description": "Deepbots is blah blah",
+      "image": "deepbots"
+    }
+]

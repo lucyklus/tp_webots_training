@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import type { Controller } from '../../types/types'
+import React from 'react'
 
-import deepbots from './images/ppoagent.png'
-import ppoAgent from './images/deepbots.png'
+import { images } from '../../images'
+import type { Controller } from '../../types/types'
 
 interface IControllerProps {
   controller: Controller
@@ -29,7 +28,7 @@ export const ControllerSelect: React.FC<IControllerProps> = ({
       }}
     >
       <img
-        src={controller.image as unknown as string}
+        src={images[controller.image]}
         alt={controller.type}
         draggable={false}
         className={'w-full h-full object-cover rounded-xl'}

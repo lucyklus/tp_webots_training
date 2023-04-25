@@ -1,0 +1,26 @@
+[
+  {
+  "type": "goal-only",
+  "title": "Goal only",
+  "description": "Lorem ipsum",
+  "image": "obstacles"
+},
+{
+  "type": "goal-random-ball",
+  "title": "Random ball position",
+  "description": "Lorem ipsum",
+  "image": "randomBall"
+},
+{
+  "type": "goal-and-obstacles",
+  "title": "Goal and obstacles",
+  "description": "Lorem ipsum",
+  "image": "twoRobotsBarrier"
+},
+{
+  "type": "soccer",
+  "title": "Soccer",
+  "description": "Lorem ipsum",
+  "image": "twoRobotsWithoutBarrier"
+}
+]

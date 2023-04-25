@@ -1,0 +1,74 @@
+[
+  {
+    "type": "camera-ball-distance",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "camera-ball-orientation",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "camera-op-goal-distance",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "supervisor-op-player-distance",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-5",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-6",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-7",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-8",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-9",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-10",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-11",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  },
+  {
+    "type": "input-data-12",
+    "description": "Camera ball distance",
+    "selected": false,
+    "image": "ppoagent"
+  }
+]

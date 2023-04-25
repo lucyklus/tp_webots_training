@@ -1,5 +1,6 @@
 import React from 'react'
 import type { World } from '../../types/types'
+import { images } from '../../images'
 
 interface IWorldProps {
   world: World
@@ -22,7 +23,7 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
       }}
     >
       <img
-        src={world.image}
+        src={images[world.image]}
         alt={world.type}
         draggable={false}
         className={'w-[400px] h-[300px] object-fit rounded-xl'}

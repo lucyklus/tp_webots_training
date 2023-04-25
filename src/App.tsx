@@ -4,8 +4,10 @@ import CodeEditor from '@uiw/react-textarea-code-editor'
 import { ControllerSelect } from './components/Controller/'
 import { WorldSelect } from './components/World/'
 import { ObservationToggle } from './components/Observation/'
-
 import { images } from './images'
+import controllersJson from './data/controllers.json'
+import worldsJson from './data/worlds.json'
+import observationsJson from './data/observations.json'
 
 import {
   type IControllerGeneratorConfig,
@@ -15,125 +17,12 @@ import {
 } from './types/types'
 
 const App: React.FC = () => {
-  const [controllers] = useState<Controller[]>([
-    {
-      type: 'pure',
-      title: 'Pure',
-      description: 'Pure is bla bala',
-      image: images.ppoagent,
-    },
-    {
-      type: 'deepbots',
-      title: 'Deepbots',
-      description: 'Deepbots is blah blah',
-      image: images.deepbots,
-    },
-  ])
-
-  const [worlds] = useState<World[]>([
-    {
-      type: 'goal-only',
-      title: 'Goal only',
-      description: 'Lorem ipsum',
-      image: images.obstacles,
-    },
-    {
-      type: 'goal-random-ball',
-      title: 'Random ball position',
-      description: 'Lorem ipsum',
-      image: images.randomBall,
-    },
-    {
-      type: 'goal-and-obstacles',
-      title: 'Goal and obstacles',
-      description: 'Lorem ipsum',
-      image: images.twoRobotsBarrier,
-    },
-    {
-      type: 'soccer',
-      title: 'Soccer',
-      description: 'Lorem ipsum',
-      image: images.twoRobotsWithoutBarrier,
-    },
-  ])
-
-  const [observations, setObservations] = useState<Observation[]>([
-    {
-      type: 'camera-ball-distance',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'camera-ball-orientation',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'camera-op-goal-distance',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'supervisor-op-player-distance',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-5',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-6',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-7',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-8',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-9',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-10',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-11',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-    {
-      type: 'input-data-12',
-      description: 'Camera ball distance',
-      selected: false,
-      image: images.ppoagent,
-    },
-  ])
-
+  const controllers: Controller[] = controllersJson as Controller[]
   const [controller, setController] = useState<Controller>(controllers[0])
+  const worlds: World[] = worldsJson as World[]
   const [world, setWorld] = useState<World>(worlds[0])
+  const [observations, setObservations] = useState<Observation[]>(observationsJson as Observation[])
+  const [currentObservation, setCurrentObservation] = useState<Observation | null>(null)
   const [rewardFormula, setRewardFormula] = useState(`function add(a, b) {\n  return a + b;\n}`)
 
   const handleCheckboxChange = (position: number, state: boolean): void => {
@@ -143,13 +32,11 @@ const App: React.FC = () => {
     setObservations(newObservations)
   }
 
-  const [currentObservation, setCurrentObservation] = useState<Observation | null>(null)
-
-  const display = (observation: Observation): void => {
+  const displayToggleDescription = (observation: Observation): void => {
     setCurrentObservation(observation)
   }
 
-  const hide = (): void => {
+  const hideToggleDescription = (): void => {
     setCurrentObservation(null)
   }
 
@@ -207,7 +94,7 @@ const App: React.FC = () => {
           <div className='flex justify-start gap-4'>
             <img
               alt={currentObservation.type}
-              src={currentObservation.image}
+              src={images[currentObservation.image]}
               className='h-48 w-48'
             />
             <div className='flex flex-col justify-center'>
@@ -225,11 +112,11 @@ const App: React.FC = () => {
             key={_observation.type}
             observation={_observation}
             index={index}
-            handleDisplay={(observation: Observation) => {
-              display(observation)
+            handleDisplayToggleDescription={(observation: Observation) => {
+              displayToggleDescription(observation)
             }}
-            handleHide={() => {
-              hide()
+            handleHideToggleDescription={() => {
+              hideToggleDescription()
             }}
             check={(position: number, state: boolean) => {
               handleCheckboxChange(position, state)

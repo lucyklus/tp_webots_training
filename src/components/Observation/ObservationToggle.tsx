@@ -1,11 +1,12 @@
 import React from 'react'
+
 import { type Observation } from '../../types/types'
 
 interface IObservationProps {
   observation: Observation
   index: number
-  handleDisplay: (observation: Observation) => void
-  handleHide: () => void
+  handleDisplayToggleDescription: (observation: Observation) => void
+  handleHideToggleDescription: () => void
   check: (position: number, state: boolean) => void
   checked: boolean
 }
@@ -13,8 +14,8 @@ interface IObservationProps {
 export const ObservationToggle: React.FC<IObservationProps> = ({
   observation,
   index,
-  handleDisplay,
-  handleHide,
+  handleDisplayToggleDescription,
+  handleHideToggleDescription,
   check,
   checked,
 }) => {
@@ -22,10 +23,10 @@ export const ObservationToggle: React.FC<IObservationProps> = ({
     <span
       key={observation.type}
       onMouseEnter={() => {
-        handleDisplay(observation)
+        handleDisplayToggleDescription(observation)
       }}
       onMouseLeave={() => {
-        handleHide()
+        handleHideToggleDescription()
       }}
       className={
         'rounded-lg p-3 border border-solid border-white flex justify-start items-center' +
