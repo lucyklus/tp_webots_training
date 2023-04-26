@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: '/scoreboard',
+    path: '/rebricek',
     element: <Scoreboard />,
   }
 ], { basename: process.env.PUBLIC_URL });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CodeEditor from '@uiw/react-textarea-code-editor'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
@@ -10,6 +10,7 @@ import { images } from './images'
 import controllersJson from './data/controllers.json'
 import worldsJson from './data/worlds.json'
 import observationsJson from './data/observations.json'
+import { Link } from 'react-router-dom'
 
 import {
   type IControllerGeneratorConfig,
@@ -92,6 +93,18 @@ const App: React.FC = () => {
     setShowSuccess(false)
   }
 
+  const handleMobile = (): void => {
+    if (window.innerWidth < 1024)
+      document.body.style.overflow = 'hidden';
+    else
+      document.body.style.overflow = '';
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleMobile);
+    return () => { window.removeEventListener('resize', handleMobile) };
+  }, []);
+
   return (
     <div className='m-10 max-w-[1500px] w-full mx-auto px-8'>
       <Snackbar
@@ -126,7 +139,9 @@ const App: React.FC = () => {
         ti nejaký pojem ušiel, ako lopta pri zlej prihrávke, stačí prejsť myšou nad daný element a
         nápoveda ti ho vysvetlí ako dobrý tréner.
       </p>
-
+      <Link to={'/rebricek'} className='text-lg font-[900] bg-[#032d53] px-12 py-3 uppercase mt-10 inline-block rounded-full'>
+        Pozri si výsledky iných vytvorených agentov
+      </Link>
       <h2 className='text-3xl my-5 font-[900] mt-20'>VÝBER OVLÁDAČA</h2>
       <p className='text-xl text-justify my-5'>
         Tvoj vytvorený ovládač bude odoslaný na naše servery, kde sa začne trénovať, ako by mal hrať
@@ -170,6 +185,8 @@ const App: React.FC = () => {
 
       <span
         className={`fixed -top-12 ${observationHelperShown ? 'translate-y-12' : ''} transition-transform left-0 right-0 py-6 w-full text-white bg-[#021727] bg-opacity-90 flex justify-center items-center z-20`}
+        onMouseEnter={() => { clearTimeout(timer); }}
+        onMouseLeave={() => { hideToggleDescription(); }}
       >
         {currentObservation !== null && (
           <div className='flex justify-start gap-4 w-[50%]'>
@@ -260,7 +277,7 @@ const App: React.FC = () => {
         }}
       />
 
-      <div className="block sm:hidden fixed top-0 left-0 w-full h-screen bg-orange-700 p-4 z-50">
+      <div className="block lg:hidden fixed top-0 left-0 w-full h-screen bg-red-600 p-4 z-50">
         <div className="semi-bold text-center text-white leading-5">
           Web nie je vhodný pre mobilné zariadenia - použite počítačové zariadenie.
         </div>

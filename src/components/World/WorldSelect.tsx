@@ -13,7 +13,7 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
     <div
       key={world.type}
       className={
-        "relative cursor-pointer border rounded-xl w-full after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:from-webotsGreen after:to-transparent" +
+        "relative cursor-pointer border rounded-xl w-full after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:to-transparent" +
         (selected
           ? " border-webotsGreen after:from-webotsGreen"
           : ' border-white after:from-neutral-800')
