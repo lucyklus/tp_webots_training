@@ -13,7 +13,8 @@ export interface Controller {
   type: ControllerType
   title: string
   description: string
-  image: string
+  image: string,
+  disabled: boolean
 }
 
 export type ObservationType =
@@ -35,6 +36,7 @@ export interface Observation {
   description: string
   selected: boolean
   image: string
+  title: string
 }
 
 export interface IControllerGeneratorConfig {

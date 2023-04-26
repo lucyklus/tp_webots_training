@@ -30,15 +30,15 @@ export const ObservationToggle: React.FC<IObservationProps> = ({
       }}
       className={
         'rounded-lg p-3 border border-solid border-white flex justify-start items-center' +
-        (checked ? ' bg-webotsGreen' : '')
+        (checked ? ' bg-webotsGreen border-transparent' : '')
       }
     >
       <span
         className={'mr-3 text-lg font-medium  w-2/3 ' + (checked ? 'text-[#021727]' : 'text-white')}
       >
-        {observation.type}
+        {observation.title}
       </span>
-      <label className='inline-flex items-center cursor-pointer w-1/3'>
+      <label className='inline-flex items-center justify-end cursor-pointer w-1/3'>
         <input
           type='checkbox'
           value=''
@@ -48,10 +48,10 @@ export const ObservationToggle: React.FC<IObservationProps> = ({
           }}
         />
         <div
-          className="w-12 h-6 relative bg-[#021727] border border-solid border-white rounded-full peer 
-                  peer-checked:after:translate-x-[106%] peer-checked:after:border-white after:content-[''] after:absolute 
-                  after:top-[1px] after:left-[2px] after:bg-white after:border peer-checked:after:bg-webotsGreen  after:rounded-full 
-                  after:h-5 after:w-5 after:transition-all "
+          className="w-12 h-6 relative bg-[#021727] border border-solid border-white rounded-full peer
+                  peer-checked:after:translate-x-[22px] peer-checked:after:border-white after:content-[''] after:absolute
+                  after:top-[1px] after:left-[2px] after:bg-white after:border peer-checked:after:bg-webotsGreen  after:rounded-full
+                  after:h-5 after:w-5 after:transition-all peer-checked:border-transparent peer-checked:after:border-transparent"
         ></div>
       </label>
     </span>

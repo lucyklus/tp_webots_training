@@ -21,10 +21,14 @@ export const ControllerSelect: React.FC<IControllerProps> = ({
         'relative w-1/5 border rounded-xl ' +
         (selected
           ? " border-webotsGreen after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:from-webotsGreen after:to-transparent"
-          : ' border-white')
+          : ' border-white') +
+        (controller.disabled != null && controller.disabled
+          ? ' opacity-50 cursor-not-allowed'
+          : ' cursor-pointer')
       }
       onClick={() => {
-        handleSelect()
+        if (!controller.disabled)
+          handleSelect();
       }}
     >
       <img

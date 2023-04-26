@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply font-["Raleway"] text-white;
+
+  font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+@keyframes rainbowanim {
+	0% { background-position: 0 0; }
+	50% { background-position: 300% 0; }
+	100% { background-position: 0 0; }
+}
+
+@layer utilities {
+  .btn-rainbow {
+    @apply bg-webotsGreen relative;
+  }
+
+  .btn-rainbow:before,
+  .btn-rainbow:after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background: linear-gradient(
+      60deg,
+      #fb0094,
+      #0000ff,
+      #00ff00,
+      #ffff00,
+      #ff0000,
+      #fb0094,
+      #0000ff,
+      #00ff00,
+      #ffff00,
+      #ff0000
+    );
+    background-size: 400%;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    z-index: -1;
+    border-radius: inherit;
+    animation: rainbowanim 20s linear infinite;
+  }
+  .btn-rainbow:after {
+    filter: blur(20px);
+  }
+}

@@ -1,14 +1,16 @@
 [
-    {
-      "type": "pure",
-      "title": "Pure",
-      "description": "Pure is bla bala",
-      "image": "ppoagent"
-    },
-    {
-      "type": "deepbots",
-      "title": "Deepbots",
-      "description": "Deepbots is blah blah",
-      "image": "deepbots"
-    }
+  {
+    "type": "deepbots",
+    "title": "Deepbots",
+    "description": "Deepbots je framework na zjednodušenie trénovania v prostredí WeBots.",
+    "image": "deepbots",
+    "disabled": false
+  },
+  {
+    "type": "pure",
+    "title": "Pure",
+    "description": "Už čoskoro",
+    "image": "ppoagent",
+    "disabled": true
+  }
 ]

@@ -1,26 +1,26 @@
 [
   {
-    "type": "goal-and-obstacles", 
-    "title": "Prekážky",
-    "description": "Svet s prekážkami rozpoznateľnými na snímke z kamery",
-    "image": "obstacles"
+    "type": "goal-only",
+    "title": "Jednoduchý",
+    "description": "Jednoduchý svet s prázdnou futbalovou bránkou",
+    "image": "goalOnly"
   },
   {
     "type": "goal-random-ball",
     "title": "Náhodná lopta",
     "description": "Lopta sa objaví na náhodnom mieste na ihrisku",
-    "image": "randomBall"
+    "image": "random"
   },
   {
-    "type": "goal-only",
-    "title": "Neaktívny oponent",
-    "description": "Súper pôsobí ako pohybujúca sa prekážka",
-    "image": "twoRobotsWithBarrier"
+    "type": "goal-and-obstacles",
+    "title": "Prekážky",
+    "description": "Svet s prekážkami rozpoznateľnými na snímke z kamery",
+    "image": "obstacles"
   },
   {
     "type": "soccer",
     "title": "Tím vs. tím",
     "description": "Každý robot hrá sám za seba, s vlastným trénovacím modelom",
-    "image": "twoRobotsWithoutBarrier"
+    "image": "soccer"
   }
 ]
