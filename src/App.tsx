@@ -131,8 +131,7 @@ const App: React.FC = () => {
 
       {currentObservation !== null && (
         <span
-          className='absolute left-0 right-0 h-56 p-2 w-full text-white bg-[#021727] 
-          bg-opacity-90 flex justify-center items-center z-10'
+          className='absolute left-0 right-0 h-56 p-2 w-full text-white bg-[#021727] bg-opacity-90 flex justify-center items-center z-10'
         >
           <div className='flex justify-start gap-4'>
             <img
@@ -201,7 +200,7 @@ const App: React.FC = () => {
 
       <div className='flex justify-center mt-10'>
         <button
-          className='rounded-full border w-1/4 h-[50px] bg-webotsGreen text-white font-["Raleway"] text-2xl'
+          className='rounded-full border w-1/4 h-[50px] bg-webotsGreen text-[#021727] font-["Raleway"] text-2xl'
           onClick={handleSubmit}
         >
           ŠTART SIMULÁCIE
