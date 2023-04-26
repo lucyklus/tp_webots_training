@@ -1,5 +1,5 @@
-import deepbots from './images/deepbots.png'
-import ppoagent from './images/ppoagent.png'
+import deepbots from './images/controllers/deepbotscontroller.png'
+import ppoagent from './images/controllers/ppoagent.png'
 import obstacles from './images/worlds/obstacles.jpg'
 import randomBall from './images/worlds/random_ball.png'
 import twoRobotsWithBarrier from './images/worlds/2_robots_barrier.jpg'
@@ -17,12 +17,11 @@ import opp_dist from './images/observations/opp_dist.png'
 import opp_goal_dist from './images/observations/opp_goal_dist.png'
 import opp_obs_sq from './images/observations/opp_obs_sq.png'
 
-import goalOnly from './images/worlds/goal.jpg';
-import random from './images/worlds/random.jpg';
-import soccer from './images/worlds/soccer.jpg';
+import goalOnly from './images/worlds/goal.jpg'
+import random from './images/worlds/random.jpg'
+import soccer from './images/worlds/soccer.jpg'
 
 export const images: Record<string, string> = {
-
   goalOnly: goalOnly as string,
   random: random as string,
   soccer: soccer as string,
