@@ -41,7 +41,7 @@ export const ObservationToggle: React.FC<IObservationProps> = ({
       <label className='inline-flex items-center justify-end cursor-pointer w-1/3'>
         <input
           type='checkbox'
-          value=''
+          value={checked ? 'true' : 'false'}
           className='sr-only peer'
           onChange={(e) => {
             check(index, (e.target as HTMLInputElement).checked)

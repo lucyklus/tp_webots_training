@@ -26,7 +26,7 @@ const App: React.FC = () => {
   const [controller, setController] = useState<Controller>(controllers[0])
   const worlds: World[] = worldsJson as World[]
   const [world, setWorld] = useState<World>(worlds[0])
-  const [observations, setObservations] = useState<Observation[]>(observationsJson as Observation[])
+  const [observations, setObservations] = useState<Observation[]>(JSON.parse(JSON.stringify(observationsJson)) as Observation[])
   const [currentObservation, setCurrentObservation] = useState<Observation | null>(null)
   const [observationHelperShown, setObservationHelperShown] = useState<boolean>(false)
   const [rewardFormula, setRewardFormula] = useState(`print('Coming soon')`)
