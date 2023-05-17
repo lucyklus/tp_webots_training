@@ -15,6 +15,10 @@ body {
 }
 
 @layer utilities {
+  .bgg-red {
+    background: rgb(220, 38, 38);
+  }
+
   .btn-rainbow {
     @apply bg-webotsGreen relative;
   }

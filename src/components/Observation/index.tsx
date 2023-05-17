@@ -52,11 +52,11 @@ export const ObservationSelector: React.FC = () => {
         onMouseLeave={() => { hideToggleDescription(); }}
       >
         {currentObservation !== null && (
-          <div className='flex justify-start gap-4 w-[50%]'>
+          <div className='flex flex-col sm:flex-row items-center justify-start gap-4 w-[95%] sm:w-fill max-w-2xl'>
             <img
               alt={currentObservation.name}
               src={images[currentObservation.image]}
-              className='h-56 w-56'
+              className='h-36 w-36 sm:h-56 sm:w-56'
             />
             <div className='flex flex-col justify-center'>
               <b className='font-bold font-xl text-white'>{currentObservation.title}</b>
@@ -66,26 +66,31 @@ export const ObservationSelector: React.FC = () => {
         )}
       </div>
 
-      <div className='grid grid-cols-4 gap-8 content-center mt-12'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 content-center mt-12'>
         {!selectedController.disabled && selectedController.observations.map((obs) => {
           const checked = build.observations.includes(obs.name);
           return (
             <span
               key={obs.name}
               onMouseEnter={() => {
-                displayToggleDescription(obs)
+                if (window.innerWidth > 768)
+                  displayToggleDescription(obs)
               }}
               onMouseLeave={() => {
                 hideToggleDescription()
               }}
               className={cl(
-                'rounded-lg p-3 border border-solid border-white flex justify-start items-center',
-                { 'bg-webotsGreen border-transparent': checked }
+                'rounded-lg p-3 border border-solid flex justify-start items-center',
+                checked ? 'bg-webotsGreen border-webotsGreen': 'border-white'
               )}
           >
             <span
               className={'mr-3 text-lg font-medium  w-2/3 ' + (checked ? 'text-[#021727]' : 'text-white')}
             >
+              <span
+                className='w-6 h-6 inline-block align-baseline p-0 text-center leading-6 mr-2 bg-neutral-300 text-neutral-700 font-[sans-serif] rounded-full md:hidden'
+                onClick={() => { displayToggleDescription(obs) }}
+              >i</span>
               {obs.title}
             </span>
             <label className='inline-flex items-center justify-end cursor-pointer w-1/3'>

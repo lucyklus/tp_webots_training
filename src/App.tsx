@@ -28,15 +28,15 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className='m-10 max-w-[1500px] w-full mx-auto px-8'>
+    <main className='pt-16 mb-10 max-w-[1500px] w-full mx-auto px-4 md:px-8'>
       <DataContextProvider value={data}>
         <BuildContextProvider value={{ ...build, updateContext: newContextUpdate }}>
           <SnackArea />
 
-          <h1 className='text-8xl mb-10 font-[900] leading-tight uppercase'>
+          <h1 className='text-3xl sm:text-5xl md:text-6xl lg:text-8xl uppercase font-[900] leading-tight'>
             &#47;&#47; Štart simulácie
           </h1>
-          <p className='text-xl text-white text-justify'>
+          <p className='text-md md:text-xl text-white text-justify mt-6 sm:mt-12'>
             Vitaj v našom futbalovom neurónovom zážitku! Tu si môžeš odskúšať aký je to pocit trénovať
             neurónky na futbalovom ihrisku v jednoduchom a zábavno-prehľadnom prostredí. Len si vyber
             typ ovládača, jeden z našich pripravených futbalových svetov, pozorovania a metriky. Ak by
@@ -99,7 +99,7 @@ const App: React.FC = () => {
       </DataContextProvider>
 
 
-    </div>
+    </main>
   )
 }
 

@@ -15,8 +15,9 @@ export const RewardEditor: React.FC = () => {
 
   return (
     <>
-      <h3>Description docs here</h3>
-      <div className='bg-[#010d17] p-8 text-[#ffc2c2] text-sm' style={codeStyle}>
+      <div>Description docs here</div>
+      <span className='bg-[#010d17] p-8 text-red-600 block lg:hidden'>Editovanie odmeňovacieho vzorca nie je dostupne na mobilnych zariadeniach</span>
+      <div className='bg-[#010d17] p-8 text-[#ffc2c2] text-sm hidden lg:block' style={codeStyle}>
         <span className='block'>
           class SoccerRobot(RobotSupervisor):
         </span>

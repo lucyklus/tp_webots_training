@@ -4,6 +4,7 @@ import App from './App'
 import './input.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Scoreboard from './Scoreboard'
+import Bakery from './Bakery'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: '/rebricek',
     element: <Scoreboard />,
+  },
+  {
+    path: '/robot/:uuid',
+    element: <Bakery />
   }
 ], { basename: process.env.PUBLIC_URL });
 

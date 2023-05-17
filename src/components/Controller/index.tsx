@@ -17,12 +17,12 @@ export const ControllerSelect: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-row gap-8 my-5 mt-10'>
+    <div className='flex flex-col sm:flex-row gap-8 my-5 mt-10'>
       {data?.controllers.map((c) => (
         <div
           key={c.name}
           className={cl(
-            'relative w-1/5 border rounded-xl',
+            'relative sm:w-1/3 lg:w-1/4 xl:w-1/5 border rounded-xl',
             (c.name === build.controller
               ? `border-webotsGreen after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:from-webotsGreen after:to-transparent`
               : 'border-white'),

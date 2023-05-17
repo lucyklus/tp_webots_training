@@ -32,3 +32,15 @@ export interface IControllerGeneratorConfig {
   observations: Array<IObservation['name']>
   rewardFn: string
 }
+
+export type WebotsWorld =  'goal-only' | 'goal-random-ball' | 'goal-and-obstacles' | 'soccer';
+export type TState = 'created' | 'in-queue' | 'in-progress' | 'finished' | 'error';
+
+export interface WEBEApiControllerGetResponse {
+  uuid: string,
+  name: string,
+  world: WebotsWorld,
+  status: TState,
+  score: number,
+  meta: string // json like
+}

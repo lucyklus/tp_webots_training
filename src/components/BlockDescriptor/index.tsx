@@ -10,7 +10,7 @@ interface IBlockDescriptor {
 export const BlockDescriptor: React.FC<React.PropsWithChildren<IBlockDescriptor>> = ({ children, title, description, className }) => (
   <>
     <h2 className={cl('text-3xl my-5 font-[900] mt-20 uppercase', className)}>&#47;&#47; {title}</h2>
-    <p className='text-xl text-justify my-5'>{description}</p>
+    <p className='text-md md:text-xl text-justify my-5'>{description}</p>
     {children}
   </>
 );
