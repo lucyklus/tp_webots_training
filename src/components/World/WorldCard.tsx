@@ -1,15 +1,12 @@
-import React, { useRef, useState } from 'react'
-import type { World } from '../../types/types'
-import { images } from '../../images'
-import { videos } from '../../videos'
+import React, { useRef, useState } from 'react';
+import { type IWorld } from '../../types';
+import { useBuild } from '../../hooks/useBuild';
+import cl from 'classnames';
+import { videos } from '../../videos';
+import { images } from '../../images';
 
-interface IWorldProps {
-  world: World
-  selected: boolean
-  handleSelect: () => void
-}
-
-export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSelect }) => {
+export const WorldCard: React.FC<{ world: IWorld }> = ({ world }) => {
+  const build = useBuild();
   const [hovered, setHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -17,7 +14,7 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
     if (videoRef.current === null)
       return;
 
-    videoRef.current.playbackRate = 3;
+    videoRef.current.playbackRate = 12;
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     videoRef.current?.play().catch(() => { });
   }
@@ -29,18 +26,17 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
     videoRef.current.currentTime = 0;
     videoRef.current?.pause();
   }
-
   return (
     <div
-      key={world.type}
-      className={
-        "relative cursor-pointer border rounded-xl w-full after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:to-transparent" +
-        (selected
-          ? " border-webotsGreen after:from-webotsGreen"
-          : ' border-white after:from-neutral-800')
-      }
+      key={world.name}
+      className={cl(
+        `relative cursor-pointer border rounded-xl w-full after:content-[''] after:rounded-xl after:absolute after:w-full after:h-full after:left-0 after:top-0 after:bg-gradient-to-t after:to-transparent`,
+        (build.world === world.name
+          ? 'border-webotsGreen after:from-webotsGreen'
+          : 'border-white after:from-neutral-800')
+      )}
       onClick={() => {
-        handleSelect()
+        build.updateContext({ world: world.name });
       }}
       onMouseEnter={() => { setHovered(true); run(); } }
       onMouseLeave={() => { setHovered(false); stop(); } }
@@ -50,16 +46,16 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
           src={videos[world.image]}
           loop
           muted
-          className={`absolute top-0 left-0 w-full h-full object-fit rounded-xl ${hovered ? 'block' : 'hidden'}`}
+          className={`absolute top-0 left-0 w-full h-full object-cover rounded-xl ${hovered ? 'block' : 'hidden'}`}
           ref={videoRef}
         />
         <img
           src={images[world.image]}
-          alt={world.type}
+          alt={world.name}
           draggable={false}
           className={`absolute top-0 left-0 w-full h-full object-fit rounded-xl ${hovered ? 'hidden' : 'block'}`}
         />
-        {selected && (
+        {build.world === world.name && (
           <span className='absolute flex items-center justify-center rounded-full w-8 h-8 -top-4 -right-4 bg-webotsGreen z-20 font-bold text-[#021727] text-lg'>
             ✓
           </span>
@@ -67,7 +63,7 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
         <p
           className={
             'absolute bottom-4 left-4 right-4 m-auto h-fit z-10 font text-sm ' +
-            (selected ? 'text-[#021727]' : 'text-white')
+            (build.world === world.name ? 'text-[#021727]' : 'text-white')
           }
         >
           <span className='font-bold text-lg'>{world.title}</span> <br />
@@ -75,5 +71,5 @@ export const WorldSelect: React.FC<IWorldProps> = ({ world, selected, handleSele
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
