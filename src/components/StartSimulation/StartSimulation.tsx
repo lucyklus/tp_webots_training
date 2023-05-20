@@ -19,7 +19,7 @@ export const StartSimulation: React.FC = () => {
       rewardFn: build.rewardFn
     };
 
-    fetch('http://localhost:3010/controller', {
+    fetch('/controller', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

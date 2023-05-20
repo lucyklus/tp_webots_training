@@ -19,7 +19,7 @@ const Scoreboard: React.FC = () => {
   const [selectedWorld, setSelectedWorld] = useState<WebotsWorld>('goal-only');
 
   const fetchAndSetData: () => void = () => {
-    fetch('http://localhost:3010/leaderboard')
+    fetch('/leaderboard')
       .then(async (res) => await res.json() as WEBEApiLeaderboardGetResponse)
       .then((data) => { setData(data); })
       .catch((err) => { console.error(err) });

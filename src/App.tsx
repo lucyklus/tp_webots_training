@@ -21,7 +21,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3010/baseInfo', { method: 'GET' })
+    fetch('/baseInfo', { method: 'GET' })
     .then(async (response) => await response.json() as IDataContext)
     .then((data) => { setData(data); })
     .catch((error) => { console.error(error); });

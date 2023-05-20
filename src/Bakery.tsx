@@ -24,7 +24,7 @@ const Bakery: React.FC = () => {
   const [data, setData] = useState<WEBEApiControllerGetResponse | undefined>(undefined);
 
   const fetchAndSetData: () => void = () => {
-    fetch(`http://localhost:3010/controller?uuid=${uuid ?? ''}`)
+    fetch(`/controller?uuid=${uuid ?? ''}`)
       .then(async (res) => await res.json() as WEBEApiControllerGetResponse)
       .then((data) => { setData(data); })
       // .then((data) => { setData({ ...data, status: 'created' }); })
@@ -43,7 +43,7 @@ const Bakery: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:3010/baseInfo', { method: 'GET' })
+    fetch('/baseInfo', { method: 'GET' })
     .then(async (response) => await response.json() as IDataContext)
     .then((data) => { setDataInfo(data); })
     .catch((error) => { console.error(error); });
