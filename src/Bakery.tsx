@@ -26,11 +26,11 @@ const Bakery: React.FC = () => {
   const fetchAndSetData: () => void = () => {
     fetch(`http://localhost:3010/controller?uuid=${uuid ?? ''}`)
       .then(async (res) => await res.json() as WEBEApiControllerGetResponse)
-      // .then((data) => { setData(data); })
+      .then((data) => { setData(data); })
       // .then((data) => { setData({ ...data, status: 'created' }); })
       // .then((data) => { setData({ ...data, status: 'in-queue' }); })
       // .then((data) => { setData({ ...data, status: 'in-progress' }); })
-      .then((data) => { setData({ ...data, status: 'finished' }); })
+      // .then((data) => { setData({ ...data, status: 'finished' }); })
       // .then((data) => { setData({ ...data, meta: '# Error\nROOOOOO\n  Tech stack trace: asdasd asdas dasdasdasda sdasdasdasd sdasdasdasdasd asdasdasdasdasd    llooo', status: 'error' }); })
       .catch((err) => { console.error(err) })
       .finally(() => { setLoaded(true); });
