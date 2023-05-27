@@ -42,5 +42,6 @@ export interface WEBEApiControllerGetResponse {
   world: WebotsWorld,
   status: TState,
   score: number,
-  meta: string // json like
+  meta: string, // json like
+  createdAt: string
 }

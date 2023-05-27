@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Scoreboard />,
   },
   {
-    path: '/robot/:uuid',
+    path: '/robot/:name',
     element: <Bakery />
   }
 ], { basename: process.env.PUBLIC_URL });

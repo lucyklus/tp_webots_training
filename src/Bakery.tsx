@@ -17,14 +17,14 @@ const stateWidth: Record<TState, string> = {
 };
 
 const Bakery: React.FC = () => {
-  const { uuid } = useParams<{ uuid: string }>();
+  const { name } = useParams<{ name: string }>();
 
   const [dataInfo, setDataInfo] = useState<IDataContext>({ worlds: [], controllers: []});
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState<WEBEApiControllerGetResponse | undefined>(undefined);
 
   const fetchAndSetData: () => void = () => {
-    fetch(`/controller?uuid=${uuid ?? ''}`)
+    fetch(`/api/controller?name=${name ?? ''}`)
       .then(async (res) => await res.json() as WEBEApiControllerGetResponse)
       .then((data) => { setData(data); })
       // .then((data) => { setData({ ...data, status: 'created' }); })
@@ -38,12 +38,16 @@ const Bakery: React.FC = () => {
 
   useEffect(() => {
     fetchAndSetData();
-    // const interval = setInterval(() => { fetchAndSetData(); }, 10000);
-    // return () => { clearInterval(interval) };
-  }, []);
+
+    if (data?.status === 'finished' || data?.status === 'error')
+      return;
+
+    const interval = setInterval(() => { fetchAndSetData(); }, 10000);
+    return () => { clearInterval(interval) };
+  }, [data?.status]);
 
   useEffect(() => {
-    fetch('/baseInfo', { method: 'GET' })
+    fetch('/api/baseInfo', { method: 'GET' })
     .then(async (response) => await response.json() as IDataContext)
     .then((data) => { setDataInfo(data); })
     .catch((error) => { console.error(error); });
@@ -76,13 +80,13 @@ const Bakery: React.FC = () => {
   if (loaded && data !== undefined)
     return (
       <main className="pt-16 max-w-[1500px] w-full mx-auto px-4 md:px-8 min-h-screen">
-        <BgSvg className="absolute top-0 left-0 w-full h-full -z-[1]" />
+        <BgSvg className="absolute top-0 left-0 w-full h-full max-h-screen -z-[1]" />
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl uppercase leading-tight font-[900]">&#47;&#47; Výsledok </h1>
         <h2 className="text-xl md:text-3xl leading-tight font-[700] mt-8 text-center block">Ovládač <span className='text-webotsGreen'>{data.name}</span>{data.status === 'finished' && (<><br />ziskal</>)}</h2>
         {data.status === 'finished' && (
           <div className="mt-12 text-center">
-            <h3 className="text-4xl md:text-7xl font-[700] text-webotsGreen">{data.score.toFixed(2)} bodov</h3>
+            <h3 className="text-4xl md:text-7xl font-[700] text-webotsGreen">{data.score} bodov</h3>
             <span className='mt-8 text-center block'>vo svete <span className='text-webotsGreen'>{dataInfo.worlds.find(w => w.name === data.world)?.title}</span></span>
           </div>
         )}
@@ -110,13 +114,13 @@ const Bakery: React.FC = () => {
 
 
         {data.status === 'error' && (
-          <div className="mt-6 md:mt-12 text-sm text-neutral-200 p-4 md:p-8 bg-[#010d17] overflow-x-auto max-w-4xl mx-auto whitespace-pre font-[monospace]">
+          <div className="mt-6 md:mt-12 text-sm text-neutral-200 p-4 md:p-8 bg-[#010d17] overflow-x-auto max-w-4xl max-h-[80vh] mx-auto whitespace-pre font-[monospace]">
             <p>{data.meta}</p>
           </div>
         )}
 
 
-        <div className="flex justify-center mt-16 md:mt-24">
+        <div className="flex justify-center mt-16 md:mt-24 mb-10">
           <Link to={'/'} className='rounded-full bg-webotsGreen text-[#021727] text-xl md:text-2xl px-8 py-3 uppercase inline-block mx-auto font-[900]'>
             Spustiť novú vlastnú simuláciu
           </Link>

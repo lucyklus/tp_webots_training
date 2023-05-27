@@ -2,9 +2,11 @@ import React from 'react'
 import { useBuild } from '../../hooks/useBuild';
 import type { IControllerGeneratorConfig } from '../../types';
 import { DEFAULT_BUILD_CONTEXT } from '../../contexts/BuildContext';
+import { useNavigate } from 'react-router-dom';
 
 export const StartSimulation: React.FC = () => {
   const build = useBuild();
+  const navigate = useNavigate();
 
   const handler = (): void => {
     if (build.observations.length === 0) {
@@ -19,7 +21,7 @@ export const StartSimulation: React.FC = () => {
       rewardFn: build.rewardFn
     };
 
-    fetch('/controller', {
+    fetch('/api/controller', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -32,7 +34,10 @@ export const StartSimulation: React.FC = () => {
       build.updateContext({
         ...DEFAULT_BUILD_CONTEXT,
         success: `Agent ${data.name} úspešne vytvorený!`
-      })
+      });
+      setTimeout(() => {
+        navigate(`robot/${data.name}`);
+      }, 500)
     })
     .catch((error) => { console.error(error); });
   }
